@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:jimin_youtube_clone/controller/app_controller.dart';
+import 'package:jimin_youtube_clone/src/controller/app_controller.dart';
+import 'package:jimin_youtube_clone/src/pages/explore.dart';
+import 'package:jimin_youtube_clone/src/pages/home.dart';
+import 'package:jimin_youtube_clone/src/pages/library.dart';
+import 'package:jimin_youtube_clone/src/pages/subscribe.dart';
 
 class App extends GetView<AppController> {
   const App({Key key}) : super(key: key);
@@ -10,7 +14,25 @@ class App extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      body: Obx(() {
+        switch(RouteName.values[controller.currentIndex.value]){
+          case RouteName.Home:
+            return Home();
+            break;
+          case RouteName.Explore:
+            return Explore();
+            break;
+          case RouteName.Add:
+            break;
+          case RouteName.Subs:
+            return Subscribe();
+            break;
+          case RouteName.Library:
+            return Library();
+            break;
+        }
+        return Container();
+      }),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
